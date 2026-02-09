@@ -1,26 +1,63 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Bind the font variable from layout.tsx */
+  --font-sans: var(--font-satoshi);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --radius-xl: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Clean, High Contrast Backgrounds */
+  --background: #F1F5F9; /* Slate-100: Better contrast than pure white for dashboards */
+  --foreground: #0F172A; /* Slate-900: Sharp text */
+  
+  /* BRAND: Deep Trust Blue */
+  --primary: #165FAC; 
+  --primary-foreground: #ffffff;
+  
+  /* BRAND: Money/Growth Green */
+  --secondary: #7CCE76; 
+  --secondary-foreground: #022c22; /* Dark green text for readability on green bg */
+  
+  /* UI Elements */
+  --muted: #E2E8F0;
+  --muted-foreground: #64748B;
+  
+  --border: #CBD5E1; /* High contrast borders */
+  --ring: #165FAC;   /* Focus ring matches primary */
+  --radius: 0.5rem;  /* Slightly sharper corners for "Financial" feel */
+}
+
+@layer utilities {
+  /* refined glow for the new blue */
+  .bg-glow-blue {
+    background: radial-gradient(circle, rgba(22, 95, 172, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* PWA / Print Styles */
+@media print {
+  .sidebar, .mobile-menu-btn { display: none !important; }
+  .main-content { margin-left: 0 !important; width: 100% !important; }
 }

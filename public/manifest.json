@@ -1,0 +1,22 @@
+{
+  "name": "EasyTap LMS",
+  "short_name": "EasyTap",
+  "description": "Instant digital loans and portfolio management.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F1F5F9",
+  "theme_color": "#165FAC",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
