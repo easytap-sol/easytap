@@ -8,29 +8,29 @@ import { LifeBuoy, X } from "lucide-react";
 
 interface SidebarProps {
   role: string;
-  companyName?: string;
+  companyName: string;
   onItemClick?: () => void;
   onClose?: () => void;
 }
 
-export function Sidebar({ role, companyName = "EasyTap", onItemClick, onClose }: SidebarProps) {
+export function Sidebar({ role, companyName, onItemClick, onClose }: SidebarProps) {
   const pathname = usePathname();
 
   // Determine Nav Items
-  const items = ["super_admin", "admin", "staff"].includes(role)
-    ? adminNav
-    : customerNav;
+  const userRole = role.toLowerCase();
+  const isAdmin = ["super_admin", "admin", "admin_staff", "staff"].includes(userRole);
+  const items = isAdmin ? adminNav : customerNav;
 
   return (
     <div className="flex h-full flex-col py-6 px-4">
       {/* 1. Brand Logo & Close Button */}
       <div className="px-4 mb-8 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group" onClick={onItemClick}>
-          <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-600/20 group-hover:scale-105 transition-transform">
-            {companyName.charAt(0).toUpperCase()}
+          <div className="h-10 w-10 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+            {(companyName || "E").charAt(0).toUpperCase()}
           </div>
           <div>
-            <h1 className="font-bold text-slate-900 tracking-tight text-lg">{companyName}</h1>
+            <h1 className="font-bold text-slate-900 tracking-tight text-lg">{companyName || "EasyTap"}</h1>
             <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Workspace</p>
           </div>
         </Link>
@@ -59,14 +59,14 @@ export function Sidebar({ role, companyName = "EasyTap", onItemClick, onClose }:
               className={cn(
                 "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 group relative overflow-hidden",
                 isActive
-                  ? "bg-blue-50 text-blue-700"
+                  ? "bg-primary/10 text-primary-deep"
                   : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
               )}
             >
               {isActive && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-blue-600 rounded-r-full" />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-primary rounded-r-full" />
               )}
-              <Icon className={cn("h-5 w-5", isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600")} />
+              <Icon className={cn("h-5 w-5", isActive ? "text-primary" : "text-slate-400 group-hover:text-slate-600")} />
               {item.title}
             </Link>
           );

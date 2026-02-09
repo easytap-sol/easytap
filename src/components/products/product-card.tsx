@@ -28,11 +28,11 @@ export function ProductCard({ product, toggleProductStatusAction }: ProductCardP
   };
 
   return (
-    <div 
+    <div
       className={cn(
         "group relative rounded-[2rem] border p-6 shadow-sm hover:shadow-lg transition-all duration-300",
-        product.is_active 
-          ? "border-emerald-100 bg-gradient-to-br from-white to-emerald-50/30" 
+        product.is_active
+          ? "border-emerald-100 bg-gradient-to-br from-white to-emerald-50/30"
           : "border-slate-100 bg-white"
       )}
     >
@@ -40,8 +40,8 @@ export function ProductCard({ product, toggleProductStatusAction }: ProductCardP
       <div className="absolute top-4 right-4">
         <div className={cn(
           "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold",
-          product.is_active 
-            ? "bg-emerald-100 text-emerald-800" 
+          product.is_active
+            ? "bg-emerald-100 text-emerald-800"
             : "bg-slate-100 text-slate-600"
         )}>
           {product.is_active ? (
@@ -63,8 +63,8 @@ export function ProductCard({ product, toggleProductStatusAction }: ProductCardP
         <div className="flex items-center gap-3 mb-2">
           <div className={cn(
             "flex h-12 w-12 items-center justify-center rounded-2xl",
-            product.is_active 
-              ? "bg-emerald-100 text-emerald-600" 
+            product.is_active
+              ? "bg-emerald-100 text-emerald-600"
               : "bg-slate-100 text-slate-600"
           )}>
             <Wallet className="h-6 w-6" />
@@ -100,7 +100,7 @@ export function ProductCard({ product, toggleProductStatusAction }: ProductCardP
       {/* Additional Features */}
       <div className="flex flex-wrap gap-2 mb-6">
         {product.processing_fee > 0 && (
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium">
+          <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary-deep text-xs font-medium">
             Processing Fee: {product.processing_fee}
           </span>
         )}
@@ -119,18 +119,18 @@ export function ProductCard({ product, toggleProductStatusAction }: ProductCardP
       {/* Action Buttons */}
       <div className="flex items-center justify-between pt-4 border-t border-slate-100">
         <span className="text-xs text-slate-500">
-          {product.updated_at || product.created_at 
+          {product.updated_at || product.created_at
             ? `Updated: ${new Date(product.updated_at || product.created_at).toLocaleDateString()}`
             : ''
           }
         </span>
-        <button 
+        <button
           onClick={handleToggleStatus}
           disabled={isToggling}
           className={cn(
             "text-sm font-bold px-4 py-2 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
-            product.is_active 
-              ? "text-red-600 hover:bg-red-50" 
+            product.is_active
+              ? "text-red-600 hover:bg-red-50"
               : "text-emerald-600 hover:bg-emerald-50"
           )}
         >

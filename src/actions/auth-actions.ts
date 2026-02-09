@@ -90,56 +90,71 @@ export async function signupAction(prevState: any, formData: FormData) {
 
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const fullName = formData.get("fullName") as string;
+  const confirmPassword = formData.get("confirmPassword") as string;
+  const firstName = formData.get("firstName") as string;
+  const lastName = formData.get("lastName") as string;
   const phone = formData.get("phone") as string;
 
-  // 1. Sign Up
+  // 1. Validate Passwords Match
+  if (password !== confirmPassword) {
+    return { error: "Passwords do not match." };
+  }
+
+  // 2. Check for Unique Phone Number
+  const { data: existingProfile } = await supabase
+    .from("profiles")
+    .select("id, status")
+    .eq("mobile_number", phone)
+    .single();
+
+  if (existingProfile) {
+    if (existingProfile.status === 'rejected') {
+      return { error: "Your account application has been rejected. Please contact support for assistance." };
+    }
+    return { error: "This phone number is already registered." };
+  }
+
+  // 3. Sign Up
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: {
-        full_name: fullName,
+        first_name: firstName,
+        last_name: lastName,
         phone: phone,
       }
     }
   });
 
-  // Handle "User already registered" - still try to create profile in case it's missing
+  // Handle "User already registered"
   if (error && !error.message.includes("already registered")) {
     return { error: error.message };
   }
 
-  const userId = data?.user?.id || (error?.message.includes("already registered") ? null : null);
-
-  // If we don't have a userId from signUp, we might need to sign in to get it, 
-  // but better to just let login fail-safe handle it if the user exists.
-  // HOWEVER, we can attempt a profile upsert if we can get the ID.
-
   if (data?.user) {
-    const firstName = fullName.split(' ')[0];
-    const lastName = fullName.split(' ').slice(1).join(' ');
-
+    // 4. Create Profile with 'inactive' status
     const { error: profileError } = await supabase.from('profiles').upsert({
       id: data.user.id,
       email: email,
       first_name: firstName,
       last_name: lastName,
       role: 'customer',
-      status: 'active',
+      status: 'inactive', // Default to inactive for admin approval
       mobile_number: phone,
-      is_kyc_verified: true
+      is_kyc_verified: false // Set to false for new users
     });
 
     if (profileError) {
       console.error("Signup profile error:", profileError);
+      return { error: "Failed to create user profile." };
     }
 
-    return { success: "Account created! You can now log in." };
+    return { success: "Account created! Please wait for admin approval before logging in." };
   }
 
   if (error?.message.includes("already registered")) {
-    return { success: "Account already exists. Please log in." };
+    return { error: "An account with this email already exists." };
   }
 
   return { error: "Signup failed." };

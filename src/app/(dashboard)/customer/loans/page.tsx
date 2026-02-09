@@ -51,7 +51,7 @@ export default async function CustomerLoansPage() {
         <AlertCircle className="h-12 w-12 text-red-400 mb-4" />
         <h3 className="text-lg font-bold text-red-900 mb-2">Failed to load loan history</h3>
         <p className="text-red-700 mb-6 max-w-sm">{error.message}</p>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           className="px-6 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors flex items-center gap-2"
         >
@@ -63,7 +63,7 @@ export default async function CustomerLoansPage() {
   }
 
   const safeLoans = loans || [];
-  
+
   // Categorize loans
   const activeLoans = safeLoans.filter(l => l.status === 'active');
   const pendingLoans = safeLoans.filter(l => l.status === 'pending');
@@ -93,7 +93,7 @@ export default async function CustomerLoansPage() {
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -121,19 +121,19 @@ export default async function CustomerLoansPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <CreditCard className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Portfolio Overview */}
       <div className="grid gap-6 md:grid-cols-3">
-        
+
         {/* Total Borrowed */}
         <div className="group relative rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
               <DollarSign className="h-5 w-5" />
             </div>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Borrowed</span>
@@ -200,17 +200,17 @@ export default async function CustomerLoansPage() {
             </span>
           </div>
         </div>
-        
+
         <div className="p-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className={cn(
               "p-6 rounded-2xl border text-center transition-all duration-300 hover:scale-[1.02]",
-              activeLoans.length > 0 
-                ? "bg-blue-50 border-blue-100" 
+              activeLoans.length > 0
+                ? "bg-primary/10 border-primary/20"
                 : "bg-slate-50 border-slate-100"
             )}>
-              <p className="text-3xl font-bold text-blue-600">{activeLoans.length}</p>
-              <p className="text-sm font-bold text-blue-600 uppercase tracking-wider mt-2">Active</p>
+              <p className="text-3xl font-bold text-primary">{activeLoans.length}</p>
+              <p className="text-sm font-bold text-primary uppercase tracking-wider mt-2">Active</p>
               {activeLoans.length > 0 && (
                 <p className="text-xs text-slate-500 mt-1">
                   KES {outstandingBalance.toLocaleString()} due
@@ -220,8 +220,8 @@ export default async function CustomerLoansPage() {
 
             <div className={cn(
               "p-6 rounded-2xl border text-center transition-all duration-300 hover:scale-[1.02]",
-              paidLoans.length > 0 
-                ? "bg-emerald-50 border-emerald-100" 
+              paidLoans.length > 0
+                ? "bg-emerald-50 border-emerald-100"
                 : "bg-slate-50 border-slate-100"
             )}>
               <p className="text-3xl font-bold text-emerald-600">{paidLoans.length}</p>
@@ -235,8 +235,8 @@ export default async function CustomerLoansPage() {
 
             <div className={cn(
               "p-6 rounded-2xl border text-center transition-all duration-300 hover:scale-[1.02]",
-              pendingLoans.length > 0 
-                ? "bg-amber-50 border-amber-100" 
+              pendingLoans.length > 0
+                ? "bg-amber-50 border-amber-100"
                 : "bg-slate-50 border-slate-100"
             )}>
               <p className="text-3xl font-bold text-amber-600">{pendingLoans.length}</p>
@@ -250,8 +250,8 @@ export default async function CustomerLoansPage() {
 
             <div className={cn(
               "p-6 rounded-2xl border text-center transition-all duration-300 hover:scale-[1.02]",
-              rejectedLoans.length > 0 
-                ? "bg-red-50 border-red-100" 
+              rejectedLoans.length > 0
+                ? "bg-red-50 border-red-100"
                 : "bg-slate-50 border-slate-100"
             )}>
               <p className="text-3xl font-bold text-red-600">{rejectedLoans.length}</p>
@@ -284,23 +284,23 @@ export default async function CustomerLoansPage() {
                 <Filter className="h-4 w-4" />
                 Filter
               </button>
-              <Link 
+              <Link
                 href="/customer/apply"
-                className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all"
+                className="px-6 py-2 bg-primary text-white font-bold rounded-xl hover:bg-primary-deep shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
               >
                 Apply New
               </Link>
             </div>
           </div>
         </div>
-        
+
         <div className="p-4">
           {safeLoans.length > 0 ? (
             <div className="space-y-4">
               {safeLoans.map((loan) => {
                 const getStatusColor = (status: string) => {
                   switch (status) {
-                    case 'active': return { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-100' };
+                    case 'active': return { bg: 'bg-primary/10', text: 'text-primary-deep', border: 'border-primary/20' };
                     case 'paid': return { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-100' };
                     case 'pending': return { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-100' };
                     case 'rejected': return { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-100' };
@@ -319,7 +319,7 @@ export default async function CustomerLoansPage() {
                 };
 
                 const statusColors = getStatusColor(loan.status || '');
-                const loanProgress = loan.total_payable 
+                const loanProgress = loan.total_payable
                   ? Math.round(((loan.amount_paid || 0) / loan.total_payable) * 100)
                   : 0;
 
@@ -347,7 +347,7 @@ export default async function CustomerLoansPage() {
                           <h4 className="text-xl font-bold text-slate-900">
                             {loan.loan_products?.name || "Loan Product"}
                           </h4>
-                          
+
                           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
                             <div className="flex items-center gap-2">
                               <Calendar className="h-4 w-4" />
@@ -372,16 +372,16 @@ export default async function CustomerLoansPage() {
                               KES {loan.principal_amount?.toLocaleString()}
                             </span>
                           </div>
-                          
+
                           {loan.status === 'active' && (
                             <>
                               <div className="flex justify-between text-sm">
                                 <span className="text-slate-600">Progress</span>
-                                <span className="font-bold text-blue-600">{loanProgress}%</span>
+                                <span className="font-bold text-primary">{loanProgress}%</span>
                               </div>
                               <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
-                                <div 
-                                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-1000"
+                                <div
+                                  className="h-full rounded-full bg-gradient-to-r from-primary to-primary-deep transition-all duration-1000"
                                   style={{ width: `${loanProgress}%` }}
                                 />
                               </div>
@@ -415,7 +415,7 @@ export default async function CustomerLoansPage() {
                           {loan.status === 'active' && (
                             <Link
                               href="/customer/overview"
-                              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-bold rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-2"
+                              className="px-4 py-2 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary-deep shadow-lg shadow-primary/20 transition-all flex items-center gap-2"
                             >
                               <ChevronRight className="h-4 w-4" />
                               Pay
@@ -472,9 +472,9 @@ export default async function CustomerLoansPage() {
               <p className="text-slate-500 mb-6 max-w-sm">
                 You haven't applied for any loans yet. Start your journey by applying today!
               </p>
-              <Link 
+              <Link
                 href="/customer/apply"
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all"
+                className="px-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-deep shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
               >
                 Apply for Your First Loan
               </Link>

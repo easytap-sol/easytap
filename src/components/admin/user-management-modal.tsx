@@ -78,7 +78,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                     <button
                         onClick={() => setActiveTab("profile")}
                         className={`flex-1 px-6 py-3 font-semibold text-sm transition-colors ${activeTab === "profile"
-                            ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50/30"
+                            ? "text-primary border-b-2 border-primary bg-primary/5"
                             : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                             }`}
                     >
@@ -88,7 +88,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                     <button
                         onClick={() => setActiveTab("password")}
                         className={`flex-1 px-6 py-3 font-semibold text-sm transition-colors ${activeTab === "password"
-                            ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50/30"
+                            ? "text-primary border-b-2 border-primary bg-primary/5"
                             : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                             }`}
                     >
@@ -124,7 +124,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                         name="firstName"
                                         defaultValue={user.first_name || ""}
                                         required
-                                        className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                        className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                     />
                                 </div>
 
@@ -136,7 +136,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                         name="lastName"
                                         defaultValue={user.last_name || ""}
                                         required
-                                        className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                        className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                     />
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                     type="email"
                                     defaultValue={user.email || ""}
                                     required
-                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                 />
                             </div>
 
@@ -165,7 +165,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                     type="tel"
                                     defaultValue={user.mobile_number || ""}
                                     required
-                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                 />
                             </div>
 
@@ -177,15 +177,100 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                 <input
                                     name="nationalId"
                                     defaultValue={user.national_id || ""}
-                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                 />
+                            </div>
+
+                            {/* Status Management */}
+                            <div className="pt-4 border-t border-slate-100">
+                                <label className="text-sm font-bold text-slate-700 block mb-3">
+                                    Account Status
+                                </label>
+                                <div className="flex flex-wrap gap-2">
+                                    {user.status === 'inactive' && (
+                                        <>
+                                            <button
+                                                type="button"
+                                                onClick={async () => {
+                                                    const { updateUserStatusAction } = await import("@/actions/user-management-actions");
+                                                    const res = await updateUserStatusAction(user.id, 'active');
+                                                    if (res.success) {
+                                                        alert("User approved successfully");
+                                                        onClose();
+                                                        router.refresh();
+                                                    } else {
+                                                        alert(res.error);
+                                                    }
+                                                }}
+                                                className="px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
+                                            >
+                                                Approve User
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={async () => {
+                                                    const { updateUserStatusAction } = await import("@/actions/user-management-actions");
+                                                    const res = await updateUserStatusAction(user.id, 'rejected');
+                                                    if (res.success) {
+                                                        alert("User rejected");
+                                                        onClose();
+                                                        router.refresh();
+                                                    } else {
+                                                        alert(res.error);
+                                                    }
+                                                }}
+                                                className="px-4 py-2 bg-red-50 text-red-600 text-xs font-bold rounded-lg hover:bg-red-100 transition-colors border border-red-100"
+                                            >
+                                                Reject User
+                                            </button>
+                                        </>
+                                    )}
+                                    {user.status === 'active' && (
+                                        <button
+                                            type="button"
+                                            onClick={async () => {
+                                                const { updateUserStatusAction } = await import("@/actions/user-management-actions");
+                                                const res = await updateUserStatusAction(user.id, 'inactive');
+                                                if (res.success) {
+                                                    alert("User deactivated");
+                                                    onClose();
+                                                    router.refresh();
+                                                } else {
+                                                    alert(res.error);
+                                                }
+                                            }}
+                                            className="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg hover:bg-slate-200 transition-colors"
+                                        >
+                                            Deactivate Account
+                                        </button>
+                                    )}
+                                    {user.status === 'rejected' && (
+                                        <button
+                                            type="button"
+                                            onClick={async () => {
+                                                const { updateUserStatusAction } = await import("@/actions/user-management-actions");
+                                                const res = await updateUserStatusAction(user.id, 'inactive');
+                                                if (res.success) {
+                                                    alert("User status reset to pending");
+                                                    onClose();
+                                                    router.refresh();
+                                                } else {
+                                                    alert(res.error);
+                                                }
+                                            }}
+                                            className="px-4 py-2 bg-primary/10 text-primary text-xs font-bold rounded-lg hover:bg-primary/20 transition-colors border border-primary/20"
+                                        >
+                                            Undo Rejection
+                                        </button>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="flex gap-3 pt-4">
                                 <button
                                     type="submit"
                                     disabled={isPending}
-                                    className="flex-1 h-12 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    className="flex-1 h-12 bg-primary text-white font-bold rounded-xl hover:bg-primary-deep transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                 >
                                     {isPending ? (
                                         <>
@@ -228,7 +313,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     placeholder="Minimum 6 characters"
-                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                 />
                             </div>
 
@@ -241,7 +326,7 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     placeholder="Re-enter password"
-                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                                    className="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                                 />
                             </div>
 
@@ -272,6 +357,6 @@ export function UserManagementModal({ user, onClose }: UserManagementModalProps)
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

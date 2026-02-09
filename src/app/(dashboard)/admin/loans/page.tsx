@@ -26,7 +26,7 @@ export default async function AdminLoansPage() {
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -55,17 +55,17 @@ export default async function AdminLoansPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <DollarSign className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Key Metrics */}
       <div className="grid gap-6 md:grid-cols-4">
         <div className="group relative rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
               <DollarSign className="h-5 w-5" />
             </div>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Total</span>
@@ -98,12 +98,12 @@ export default async function AdminLoansPage() {
 
         <div className="group relative rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-50 text-violet-600 group-hover:scale-110 transition-transform">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
               <CheckCircle className="h-5 w-5" />
             </div>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Closed</span>
           </div>
-          <p className="text-2xl font-bold text-violet-600">
+          <p className="text-2xl font-bold text-primary">
             {loans?.filter(l => l.status === 'paid').length || 0}
           </p>
           <p className="text-sm text-slate-500 mt-1">Fully Repaid</p>
@@ -125,7 +125,7 @@ export default async function AdminLoansPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="p-2">
           {loans?.length ? (
             <div className="space-y-4">

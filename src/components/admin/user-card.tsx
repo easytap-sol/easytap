@@ -23,7 +23,7 @@ export function UserCard({ profile }: { profile: any }) {
             <div className="p-4 flex items-center gap-4 cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
 
                 {/* Avatar / Initials */}
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${profile.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${profile.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-primary/10 text-primary'
                     }`}>
                     {profile.first_name?.charAt(0)}{profile.last_name?.charAt(0)}
                 </div>

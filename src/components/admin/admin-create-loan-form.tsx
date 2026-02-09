@@ -167,9 +167,9 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                 <div className={cn(
                   "flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold",
                   step === stepName
-                    ? "bg-blue-100 text-blue-600"
+                    ? "bg-primary/10 text-primary"
                     : index < ["customer", "product", "amount", "review"].indexOf(step)
-                      ? "bg-emerald-100 text-emerald-600"
+                      ? "bg-primary/20 text-primary-deep"
                       : "bg-slate-100 text-slate-600"
                 )}>
                   {index < ["customer", "product", "amount", "review"].indexOf(step) ? (
@@ -180,7 +180,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                 </div>
                 <span className={cn(
                   "font-bold",
-                  step === stepName ? "text-blue-600" : "text-slate-600"
+                  step === stepName ? "text-primary" : "text-slate-600"
                 )}>
                   {stepName === "customer" && "Customer"}
                   {stepName === "product" && "Product"}
@@ -225,7 +225,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
         {step === "customer" && (
           <div className="p-8 space-y-6">
             <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Users className="h-4 w-4" />
               </div>
               <h3 className="font-bold text-slate-900 text-lg">Select Customer</h3>
@@ -255,8 +255,8 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                       className={cn(
                         "p-4 rounded-xl border text-left transition-all",
                         customerId === customer.id
-                          ? "border-blue-500 bg-blue-50/30 ring-2 ring-blue-500/20"
-                          : "border-slate-200 hover:border-blue-300 hover:bg-blue-50/30"
+                          ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                          : "border-slate-200 hover:border-primary/40 hover:bg-primary/5"
                       )}
                     >
                       <div className="flex items-center gap-3">
@@ -289,12 +289,12 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
 
               {/* Selected Customer Info */}
               {selectedCustomer && (
-                <div className="rounded-2xl bg-blue-50 border border-blue-100 p-4">
+                <div className="rounded-2xl bg-primary/5 border border-primary/10 p-4">
                   <div className="flex items-center gap-3">
-                    <User className="h-5 w-5 text-blue-600" />
+                    <User className="h-5 w-5 text-primary" />
                     <div>
-                      <p className="font-bold text-blue-700">Selected Customer:</p>
-                      <p className="text-blue-600 text-sm">
+                      <p className="font-bold text-primary-deep">Selected Customer:</p>
+                      <p className="text-primary text-sm">
                         {customerName} ({customerEmail})
                       </p>
                     </div>
@@ -308,7 +308,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                 type="button"
                 onClick={nextStep}
                 disabled={!customerId}
-                className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                className="w-full h-12 bg-primary text-white font-bold rounded-2xl hover:bg-primary-deep shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
               >
                 {selectedCustomer ? `Continue for ${selectedCustomer.first_name || selectedCustomer.email}` : "Continue to Product Selection"}
               </button>
@@ -321,7 +321,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
           <div className="p-8 space-y-6">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <CreditCard className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Select Loan Product</h3>
@@ -329,7 +329,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
               <button
                 type="button"
                 onClick={prevStep}
-                className="text-sm font-bold text-slate-600 hover:text-blue-600"
+                className="text-sm font-bold text-slate-600 hover:text-primary"
               >
                 ← Change Customer
               </button>
@@ -351,8 +351,8 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                   className={cn(
                     "group relative rounded-2xl border p-6 text-left transition-all duration-300 hover:shadow-lg",
                     productId === product.id
-                      ? "border-blue-500 bg-blue-50/30 ring-2 ring-blue-500/20"
-                      : "border-slate-100 bg-white hover:border-blue-200"
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "border-slate-100 bg-white hover:border-primary/20"
                   )}
                 >
                   <div className="flex items-center justify-between mb-4">
@@ -360,8 +360,8 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                     <div className={cn(
                       "h-6 w-6 rounded-full border-2 transition-colors",
                       productId === product.id
-                        ? "border-blue-500 bg-blue-500"
-                        : "border-slate-300 group-hover:border-blue-300"
+                        ? "border-primary bg-primary"
+                        : "border-slate-300 group-hover:border-primary/40"
                     )}>
                       {productId === product.id && (
                         <div className="h-full w-full flex items-center justify-center">
@@ -380,7 +380,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                       <Percent className="h-3 w-3" />
                       {product.interest_rate}% interest
                     </div>
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 font-bold">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-bold">
                       <Calendar className="h-3 w-3" />
                       {product.duration_days} days
                     </div>
@@ -396,7 +396,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
           <div className="p-8 space-y-6">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <DollarSign className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Loan Amount & Disbursement</h3>
@@ -404,7 +404,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
               <button
                 type="button"
                 onClick={prevStep}
-                className="text-sm font-bold text-slate-600 hover:text-blue-600"
+                className="text-sm font-bold text-slate-600 hover:text-primary"
               >
                 ← Change Product
               </button>
@@ -441,7 +441,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                     placeholder="Enter loan amount"
                     min="100"
                     step="100"
-                    className="w-full h-12 rounded-2xl border-2 border-slate-200 bg-slate-50 pl-12 pr-4 text-2xl font-bold text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none transition-all"
+                    className="w-full h-12 rounded-2xl border-2 border-slate-200 bg-slate-50 pl-12 pr-4 text-2xl font-bold text-slate-900 placeholder:text-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/20 focus:outline-none transition-all"
                   />
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
@@ -461,7 +461,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                     value={disbursementRef}
                     onChange={(e) => setDisbursementRef(e.target.value.toUpperCase())}
                     placeholder="e.g. RJH82D9K3L"
-                    className="w-full h-12 rounded-2xl border-2 border-slate-200 bg-slate-50 pl-12 pr-4 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none transition-all"
+                    className="w-full h-12 rounded-2xl border-2 border-slate-200 bg-slate-50 pl-12 pr-4 text-slate-900 placeholder:text-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/20 focus:outline-none transition-all"
                   />
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
@@ -479,7 +479,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Any additional information about this loan..."
                   rows={3}
-                  className="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:outline-none resize-none transition-all"
+                  className="w-full rounded-2xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/20 focus:outline-none resize-none transition-all"
                 />
               </div>
 
@@ -487,7 +487,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
               {calculations && (
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <Calculator className="h-5 w-5 text-blue-600" />
+                    <Calculator className="h-5 w-5 text-primary" />
                     <h4 className="font-bold text-slate-900">Quick Preview</h4>
                   </div>
                   <div className="space-y-2">
@@ -504,7 +504,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                     <div className="pt-2 border-t border-slate-200">
                       <div className="flex justify-between items-center">
                         <span className="font-bold text-slate-700">Total Payable</span>
-                        <span className="text-lg font-bold text-blue-600">
+                        <span className="text-lg font-bold text-primary">
                           KES {calculations.totalPayable.toLocaleString()}
                         </span>
                       </div>
@@ -519,7 +519,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                 type="button"
                 onClick={nextStep}
                 disabled={!principalAmount || !disbursementRef}
-                className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                className="w-full h-12 bg-primary text-white font-bold rounded-2xl hover:bg-primary-deep shadow-lg shadow-primary/20 transition-all duration-300"
               >
                 Review & Create Loan
               </button>
@@ -532,7 +532,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
           <div className="p-8 space-y-6">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <AlertCircle className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Review & Confirm</h3>
@@ -540,7 +540,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
               <button
                 type="button"
                 onClick={prevStep}
-                className="text-sm font-bold text-slate-600 hover:text-blue-600"
+                className="text-sm font-bold text-slate-600 hover:text-primary"
               >
                 ← Edit Details
               </button>
@@ -597,7 +597,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
-                        <Receipt className="h-4 w-4 text-blue-500" />
+                        <Receipt className="h-4 w-4 text-primary" />
                         <span className="text-slate-700">Principal Amount</span>
                       </div>
                       <span className="text-xl font-bold text-slate-900">KES {calculations.principal.toLocaleString()}</span>
@@ -621,10 +621,10 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
                     <div className="pt-3 border-t border-slate-200">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2">
-                          <Calculator className="h-4 w-4 text-blue-500" />
+                          <Calculator className="h-4 w-4 text-primary" />
                           <span className="font-bold text-slate-900">Total Payable</span>
                         </div>
-                        <span className="text-2xl font-bold text-blue-600">KES {calculations.totalPayable.toLocaleString()}</span>
+                        <span className="text-2xl font-bold text-primary">KES {calculations.totalPayable.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
@@ -654,11 +654,11 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
 
                 {/* Security & Compliance Notice */}
                 <div className="mt-6 pt-6 border-t border-slate-200">
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-blue-50 border border-blue-100">
-                    <Shield className="h-5 w-5 text-blue-600" />
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                    <Shield className="h-5 w-5 text-primary" />
                     <div>
-                      <p className="text-xs font-bold text-blue-700">Security Notice</p>
-                      <p className="text-xs text-blue-600">
+                      <p className="text-xs font-bold text-primary-deep">Security Notice</p>
+                      <p className="text-xs text-primary">
                         This action will create a permanent ledger entry. Please verify all details before proceeding.
                       </p>
                     </div>
@@ -678,7 +678,7 @@ export function AdminCreateLoanForm({ products, recentCustomers }: AdminCreateLo
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="flex-1 h-12 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold rounded-2xl hover:from-emerald-700 hover:to-emerald-600 shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
+                className="flex-1 h-12 bg-primary text-white font-bold rounded-2xl hover:bg-primary-deep shadow-lg shadow-primary/20 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

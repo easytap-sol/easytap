@@ -8,20 +8,33 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-white">
-      
+    <div className="min-h-screen grid lg:grid-cols-2 bg-background">
+
+      {/* MOBILE HEADER - Only visible on small screens */}
+      <div className="lg:hidden w-full border-b bg-white p-4 flex items-center justify-between sticky top-0 z-50">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold shadow-sm shadow-primary/20">
+            E
+          </div>
+          <span className="font-bold text-lg tracking-tight text-slate-900">EasyTap</span>
+        </Link>
+        <Link href="/" className="text-sm font-bold text-primary hover:underline">
+          Back to Home
+        </Link>
+      </div>
+
       {/* LEFT SIDE - Brand Visuals (Bright & Airy) */}
       <div className="hidden lg:flex flex-col justify-between relative overflow-hidden bg-slate-50 border-r border-slate-100 p-16">
-        
+
         {/* Background Decor: Soft Gradients */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-[100px] mix-blend-multiply" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[100px] mix-blend-multiply" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] mix-blend-multiply" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/30 rounded-full blur-[100px] mix-blend-multiply" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
 
         {/* Brand Logo */}
         <div className="relative z-10">
           <Link href="/" className="flex items-center gap-3">
-             <div className="h-10 w-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-600/20">
+            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/20">
               E
             </div>
             <span className="font-bold text-2xl tracking-tight text-slate-900">EasyTap</span>
@@ -32,7 +45,7 @@ export default function AuthLayout({
         <div className="relative z-10 max-w-md mt-12">
           <div className="bg-white/60 backdrop-blur-md border border-white/80 p-8 rounded-[2rem] shadow-xl shadow-slate-200/50">
             <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 bg-blue-50 rounded-full text-blue-600">
+              <div className="p-3 bg-primary/10 rounded-full text-primary">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <div>
@@ -42,15 +55,15 @@ export default function AuthLayout({
             </div>
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-slate-600">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                <CheckCircle2 className="w-5 h-5 text-primary" />
                 <span className="text-sm font-medium">Disbursed to M-Pesa in seconds</span>
               </div>
               <div className="flex items-center gap-3 text-slate-600">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                <CheckCircle2 className="w-5 h-5 text-primary" />
                 <span className="text-sm font-medium">Transparent, low interest rates</span>
               </div>
               <div className="flex items-center gap-3 text-slate-600">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                <CheckCircle2 className="w-5 h-5 text-primary" />
                 <span className="text-sm font-medium">No hidden paperwork</span>
               </div>
             </div>
@@ -60,7 +73,7 @@ export default function AuthLayout({
         {/* Footer Text */}
         <div className="relative z-10 mt-auto pt-12">
           <p className="text-sm text-slate-500 font-medium">
-            Licensed Digital Credit Provider (DCP). <br/>
+            Licensed Digital Credit Provider (DCP). <br />
             Regulated by the Central Bank of Kenya.
           </p>
         </div>
@@ -71,10 +84,10 @@ export default function AuthLayout({
         <div className="w-full max-w-[400px] mx-auto animate-fade-in-up">
           {children}
         </div>
-        
+
         {/* Mobile Footer */}
         <div className="lg:hidden mt-10 text-center text-xs text-slate-400">
-           © {new Date().getFullYear()} EasyTap Solutions.
+          © {new Date().getFullYear()} EasyTap Solutions.
         </div>
       </div>
     </div>

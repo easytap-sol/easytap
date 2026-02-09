@@ -18,7 +18,7 @@ export default async function AdminProductsPage() {
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -47,14 +47,14 @@ export default async function AdminProductsPage() {
             </div>
           </div>
         </div>
-        
+
         <Wallet className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Main Content Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
-        
+
         {/* LEFT COLUMN: Create Product Form */}
         <div className="lg:col-span-1">
           <div className="sticky top-6 space-y-6">
@@ -77,8 +77,8 @@ export default async function AdminProductsPage() {
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-slate-400">Avg. interest rate</span>
                   <span className="font-bold">
-                    {products?.length ? 
-                      (products.reduce((sum: number, p: any) => sum + p.interest_rate, 0) / products.length).toFixed(1) + '%' 
+                    {products?.length ?
+                      (products.reduce((sum: number, p: any) => sum + p.interest_rate, 0) / products.length).toFixed(1) + '%'
                       : 'N/A'
                     }
                   </span>
@@ -96,7 +96,7 @@ export default async function AdminProductsPage() {
 
         {/* RIGHT COLUMN: Product List */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h2 className="text-2xl font-bold text-slate-900">All Products</h2>
@@ -108,8 +108,8 @@ export default async function AdminProductsPage() {
           {products?.length ? (
             <div className="grid gap-4 md:grid-cols-2">
               {products.map((product: any) => (
-                <ProductCard 
-                  key={product.id} 
+                <ProductCard
+                  key={product.id}
                   product={product}
                   toggleProductStatusAction={toggleProductStatusAction}
                 />
@@ -124,7 +124,7 @@ export default async function AdminProductsPage() {
                 {error ? "Error loading products" : "No products yet"}
               </h3>
               <p className="text-slate-500 mb-6 max-w-md">
-                {error 
+                {error
                   ? `Database error: ${error.message}`
                   : "Create your first loan product to start offering loans to customers."
                 }

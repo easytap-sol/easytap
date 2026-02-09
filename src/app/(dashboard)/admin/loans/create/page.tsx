@@ -22,7 +22,7 @@ export default async function AdminCreateLoanPage() {
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -50,17 +50,17 @@ export default async function AdminCreateLoanPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <Wallet className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Benefits & Features */}
       <div className="grid gap-6 md:grid-cols-3">
         <div className="group relative rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center gap-4 mb-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
               <UserPlus className="h-6 w-6" />
             </div>
             <div>
@@ -105,8 +105,8 @@ export default async function AdminCreateLoanPage() {
       </div>
 
       {/* 3. Main Creation Form */}
-      <AdminCreateLoanForm 
-        products={(products as any) || []} 
+      <AdminCreateLoanForm
+        products={(products as any) || []}
         recentCustomers={(recentCustomers as any) || []}
       />
     </div>

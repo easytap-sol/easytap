@@ -24,6 +24,9 @@ export function UsersTable({ profiles }: UsersTableProps) {
                                 Role
                             </th>
                             <th className="text-left py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th className="text-left py-4 px-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
                                 Contact
                             </th>
                             <th className="text-right py-4 px-4 pr-8 text-xs font-bold text-slate-500 uppercase tracking-wider">
@@ -38,8 +41,8 @@ export function UsersTable({ profiles }: UsersTableProps) {
                                     <div className="flex items-center gap-4">
                                         <div
                                             className={`w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-black uppercase shadow-sm border ${profile.role === "customer"
-                                                    ? "bg-white text-slate-600 border-slate-200"
-                                                    : "bg-indigo-50 text-indigo-600 border-indigo-100"
+                                                ? "bg-white text-slate-600 border-slate-200"
+                                                : "bg-secondary text-white border-secondary-deep/20"
                                                 }`}
                                         >
                                             {profile.first_name?.[0]}
@@ -69,6 +72,23 @@ export function UsersTable({ profiles }: UsersTableProps) {
                                     )}
                                 </td>
                                 <td className="py-4 px-4">
+                                    {profile.status === 'active' && (
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                                            Active
+                                        </span>
+                                    )}
+                                    {(profile.status === 'inactive' || !profile.status) && (
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">
+                                            Pending
+                                        </span>
+                                    )}
+                                    {profile.status === 'rejected' && (
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-800">
+                                            Rejected
+                                        </span>
+                                    )}
+                                </td>
+                                <td className="py-4 px-4">
                                     <div className="flex flex-col">
                                         <span className="text-sm font-bold text-slate-700">{profile.email}</span>
                                         <span className="text-xs text-slate-400">
@@ -79,7 +99,7 @@ export function UsersTable({ profiles }: UsersTableProps) {
                                 <td className="py-4 px-4 text-right pr-8">
                                     <button
                                         onClick={() => setSelectedUser(profile)}
-                                        className="p-2 rounded-xl hover:bg-blue-50 hover:shadow-md border border-transparent hover:border-blue-100 text-slate-400 hover:text-blue-600 transition-all"
+                                        className="p-2 rounded-xl hover:bg-primary/10 hover:shadow-md border border-transparent hover:border-primary/20 text-slate-400 hover:text-primary transition-all"
                                         title="Manage user"
                                     >
                                         <MoreHorizontal className="w-5 h-5" />

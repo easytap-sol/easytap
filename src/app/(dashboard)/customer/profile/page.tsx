@@ -21,55 +21,55 @@ export default async function CustomerProfilePage() {
   if (!profile) return <div>Profile not found.</div>;
 
   // Get customer stats with null safety
-const { count: activeLoansCount } = await supabase
-  .from("loans")
-  .select("*", { count: 'exact', head: true })
-  .eq('user_id', user.id)
-  .eq('status', 'active');
+  const { count: activeLoansCount } = await supabase
+    .from("loans")
+    .select("*", { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .eq('status', 'active');
 
-const { count: totalLoansCount } = await supabase
-  .from("loans")
-  .select("*", { count: 'exact', head: true })
-  .eq('user_id', user.id);
+  const { count: totalLoansCount } = await supabase
+    .from("loans")
+    .select("*", { count: 'exact', head: true })
+    .eq('user_id', user.id);
 
-const { count: onTimeRepaymentsCount } = await supabase
-  .from("loans")
-  .select("*", { count: 'exact', head: true })
-  .eq('user_id', user.id)
-  .eq('status', 'paid');
+  const { count: onTimeRepaymentsCount } = await supabase
+    .from("loans")
+    .select("*", { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .eq('status', 'paid');
 
-// Convert to numbers (null becomes 0)
-const activeLoans = activeLoansCount || 0;
-const totalLoans = totalLoansCount || 0;
-const onTimeRepayments = onTimeRepaymentsCount || 0;
+  // Convert to numbers (null becomes 0)
+  const activeLoans = activeLoansCount || 0;
+  const totalLoans = totalLoansCount || 0;
+  const onTimeRepayments = onTimeRepaymentsCount || 0;
 
-// Calculate credit health (simplified)
-const calculateCreditHealth = () => {
-  let score = 500; // Base score
-  if (onTimeRepayments > 0) score += 200;
-  if (activeLoans === 0 && totalLoans > 0) score += 100;
-  
-  // If no loans yet, return base score
-  if (totalLoans === 0) {
-    return { score: 500, level: 'No History' };
-  }
-  
-  score = Math.max(0, Math.min(1000, score));
-  
-  let level = 'Fair';
-  if (score >= 700) level = 'Excellent';
-  else if (score >= 500) level = 'Good';
-  else if (score >= 300) level = 'Fair';
-  else level = 'Poor';
-  
-  return { score, level };
-};
+  // Calculate credit health (simplified)
+  const calculateCreditHealth = () => {
+    let score = 500; // Base score
+    if (onTimeRepayments > 0) score += 200;
+    if (activeLoans === 0 && totalLoans > 0) score += 100;
 
-const creditHealth = calculateCreditHealth();
+    // If no loans yet, return base score
+    if (totalLoans === 0) {
+      return { score: 500, level: 'No History' };
+    }
+
+    score = Math.max(0, Math.min(1000, score));
+
+    let level = 'Fair';
+    if (score >= 700) level = 'Excellent';
+    else if (score >= 500) level = 'Good';
+    else if (score >= 300) level = 'Fair';
+    else level = 'Poor';
+
+    return { score, level };
+  };
+
+  const creditHealth = calculateCreditHealth();
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -97,28 +97,28 @@ const creditHealth = calculateCreditHealth();
             </div>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <User className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Main Content Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
-        
+
         {/* LEFT COLUMN: Profile Card & Credit Health */}
         <div className="lg:col-span-1 space-y-6">
-          
+
           {/* Profile Card */}
           <div className="relative rounded-[2.5rem] border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-8 shadow-sm overflow-hidden">
             {/* Gradient Background */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-blue-600/10 to-indigo-600/10" />
-            
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-primary/10 to-primary-deep/10" />
+
             <div className="relative z-10 flex flex-col items-center text-center">
               {/* Avatar */}
               <div className="mb-4">
                 <div className="relative">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 p-1">
+                  <div className="w-32 h-32 rounded-full bg-gradient-to-r from-primary to-primary-deep p-1">
                     <div className="w-full h-full rounded-full bg-white flex items-center justify-center text-4xl font-bold text-slate-900">
                       {profile.first_name?.[0]}{profile.last_name?.[0]}
                     </div>
@@ -133,9 +133,9 @@ const creditHealth = calculateCreditHealth();
               <h2 className="text-2xl font-bold text-slate-900 mb-1">
                 {profile.first_name} {profile.last_name}
               </h2>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 mb-4">
-                <Shield className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-bold text-blue-700 uppercase tracking-wider capitalize">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
+                <Shield className="h-4 w-4 text-primary" />
+                <span className="text-sm font-bold text-primary uppercase tracking-wider capitalize">
                   {profile.role}
                 </span>
               </div>
@@ -149,7 +149,7 @@ const creditHealth = calculateCreditHealth();
                     <p className="font-bold text-slate-900 truncate">{profile.email}</p>
                   </div>
                 </div>
-                
+
                 {profile.mobile_number && (
                   <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50">
                     <Phone className="h-5 w-5 text-slate-400" />
@@ -188,7 +188,7 @@ const creditHealth = calculateCreditHealth();
                   <span className="text-sm text-slate-400 ml-2">/1000</span>
                 </p>
                 <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
-                  <div 
+                  <div
                     className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400"
                     style={{ width: `${(creditHealth.score / 1000) * 100}%` }}
                   />
@@ -197,7 +197,7 @@ const creditHealth = calculateCreditHealth();
                   {creditHealth.level}
                 </p>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-slate-400">On-time Loans</span>
@@ -220,18 +220,18 @@ const creditHealth = calculateCreditHealth();
 
         {/* RIGHT COLUMN: Settings & Details */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* Account Settings */}
           <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
             <div className="border-b border-slate-100 px-8 py-6">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Settings className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold text-slate-900">Account Settings</h3>
               </div>
             </div>
-            
+
             <div className="p-8 space-y-6">
               {/* Personal Information */}
               <div className="space-y-4">
@@ -282,7 +282,7 @@ const creditHealth = calculateCreditHealth();
                   <div>
                     <label className="text-sm font-bold text-slate-700 mb-2 block">User Role</label>
                     <div className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 flex items-center gap-3">
-                      <Shield className="h-4 w-4 text-blue-600" />
+                      <Shield className="h-4 w-4 text-primary" />
                       <span className="font-medium text-slate-900 capitalize">{profile.role}</span>
                     </div>
                   </div>
@@ -290,8 +290,8 @@ const creditHealth = calculateCreditHealth();
                     <label className="text-sm font-bold text-slate-700 mb-2 block">KYC Status</label>
                     <div className={cn(
                       "h-12 rounded-2xl border px-4 flex items-center gap-3",
-                      profile.is_kyc_verified 
-                        ? "border-emerald-200 bg-emerald-50" 
+                      profile.is_kyc_verified
+                        ? "border-emerald-200 bg-emerald-50"
                         : "border-amber-200 bg-amber-50"
                     )}>
                       <div className={cn(
@@ -313,7 +313,7 @@ const creditHealth = calculateCreditHealth();
 
           {/* Security & Preferences */}
           <div className="grid md:grid-cols-2 gap-6">
-            
+
             {/* Security Settings */}
             <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
               <div className="border-b border-slate-100 px-6 py-5">
@@ -324,7 +324,7 @@ const creditHealth = calculateCreditHealth();
                   <h3 className="font-bold text-slate-900">Security</h3>
                 </div>
               </div>
-              
+
               <div className="p-6 space-y-4">
                 <div className="group p-4 rounded-2xl border border-slate-100 hover:border-red-200 hover:bg-red-50/30 transition-all cursor-pointer">
                   <div className="flex items-center justify-between">
@@ -338,13 +338,13 @@ const creditHealth = calculateCreditHealth();
                   </div>
                 </div>
 
-                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer">
+                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-bold text-slate-900">Two-Factor Authentication</p>
                       <p className="text-sm text-slate-500">Add an extra layer of security</p>
                     </div>
-                    <button className="text-sm font-bold text-blue-600 hover:text-blue-700 px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors">
+                    <button className="text-sm font-bold text-primary hover:text-primary-deep px-4 py-2 rounded-xl hover:bg-primary/10 transition-colors">
                       Enable
                     </button>
                   </div>
@@ -370,21 +370,21 @@ const creditHealth = calculateCreditHealth();
             <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
               <div className="border-b border-slate-100 px-6 py-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Bell className="h-4 w-4" />
                   </div>
                   <h3 className="font-bold text-slate-900">Preferences</h3>
                 </div>
               </div>
-              
+
               <div className="p-6 space-y-4">
-                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:bg-indigo-50/30 transition-all cursor-pointer">
+                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-bold text-slate-900">Notifications</p>
                       <p className="text-sm text-slate-500">Manage alerts and emails</p>
                     </div>
-                    <button className="text-sm font-bold text-indigo-600 hover:text-indigo-700 px-4 py-2 rounded-xl hover:bg-indigo-50 transition-colors">
+                    <button className="text-sm font-bold text-primary hover:text-primary-deep px-4 py-2 rounded-xl hover:bg-primary/10 transition-colors">
                       <Bell className="h-4 w-4" />
                     </button>
                   </div>
@@ -409,7 +409,7 @@ const creditHealth = calculateCreditHealth();
                       <p className="text-sm text-slate-500">Sign out from all devices</p>
                     </div>
                     <form action="/auth/signout" method="post">
-                      <button 
+                      <button
                         type="submit"
                         className="text-sm font-bold text-slate-600 hover:text-slate-700 px-4 py-2 rounded-xl hover:bg-slate-50 transition-colors flex items-center gap-2"
                       >
@@ -427,37 +427,37 @@ const creditHealth = calculateCreditHealth();
           <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
             <div className="border-b border-slate-100 px-8 py-6">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <FileText className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold text-slate-900">KYC Documents</h3>
                 <span className={cn(
                   "inline-flex items-center px-3 py-1 rounded-full text-xs font-bold",
-                  profile.is_kyc_verified 
-                    ? "bg-emerald-100 text-emerald-700" 
+                  profile.is_kyc_verified
+                    ? "bg-emerald-100 text-emerald-700"
                     : "bg-amber-100 text-amber-700"
                 )}>
                   {profile.is_kyc_verified ? 'Verified' : 'Pending'}
                 </span>
               </div>
             </div>
-            
+
             <div className="p-8">
               <div className={cn(
                 "rounded-2xl border-2 border-dashed p-12 text-center transition-all duration-300",
-                profile.is_kyc_verified 
-                  ? "border-emerald-200 bg-emerald-50/30" 
+                profile.is_kyc_verified
+                  ? "border-emerald-200 bg-emerald-50/30"
                   : "border-amber-200 bg-amber-50/30"
               )}>
                 <div className={cn(
                   "flex h-16 w-16 items-center justify-center rounded-full mx-auto mb-4",
-                  profile.is_kyc_verified 
-                    ? "bg-emerald-100 text-emerald-600" 
+                  profile.is_kyc_verified
+                    ? "bg-emerald-100 text-emerald-600"
                     : "bg-amber-100 text-amber-600"
                 )}>
                   <FileText className="h-8 w-8" />
                 </div>
-                
+
                 {profile.is_kyc_verified ? (
                   <>
                     <h4 className="text-lg font-bold text-emerald-700 mb-2">KYC Verified</h4>
@@ -480,7 +480,7 @@ const creditHealth = calculateCreditHealth();
                   </>
                 )}
               </div>
-              
+
               <div className="mt-6 grid md:grid-cols-3 gap-4">
                 <div className="text-center p-4 rounded-xl bg-slate-50">
                   <p className="text-sm font-bold text-slate-700 mb-1">National ID</p>

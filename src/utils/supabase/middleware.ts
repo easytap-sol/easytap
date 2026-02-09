@@ -2,10 +2,17 @@ import { createServerClient } from "@supabase/ssr"
 import { type NextRequest, NextResponse } from "next/server"
 
 export async function updateSession(request: NextRequest) {
+  // 1. Prepare Request Headers (to pass path to layouts)
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-url', request.nextUrl.pathname + request.nextUrl.search)
+
   let supabaseResponse = NextResponse.next({
-    request,
+    request: {
+      headers: requestHeaders,
+    },
   })
 
+  // 2. Initialize Supabase
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -17,7 +24,9 @@ export async function updateSession(request: NextRequest) {
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
-            request,
+            request: {
+              headers: requestHeaders, // Important: Keep headers even when cookies change
+            },
           })
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
@@ -37,50 +46,15 @@ export async function updateSession(request: NextRequest) {
 
   const path = request.nextUrl.pathname
 
-  // Protect Admin Routes
-  if (path.startsWith("/admin")) {
-    if (!user) {
-      return NextResponse.redirect(new URL("/login", request.url))
-    }
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single()
-
-    if (profile?.role !== "admin") {
-      return NextResponse.redirect(new URL("/customer", request.url))
-    }
+  // Basic protection: If no user and trying to access dashboard, redirect to login
+  if (!user && (path.startsWith("/admin") || path.startsWith("/customer"))) {
+    return NextResponse.redirect(new URL("/login", request.url))
   }
 
-  // Protect Customer Routes
-  if (path.startsWith("/customer")) {
-    if (!user) {
-      return NextResponse.redirect(new URL("/login", request.url))
-    }
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single()
-
-    if (profile?.role !== "customer") {
-      return NextResponse.redirect(new URL("/admin", request.url))
-    }
-  }
-
-  // Auth Routes - Redirect if logged in
-  if (path.startsWith("/login") || path.startsWith("/signup")) {
-    if (user) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single()
-
-      if (profile?.role === "admin") return NextResponse.redirect(new URL("/admin", request.url))
-      if (profile?.role === "customer") return NextResponse.redirect(new URL("/customer", request.url))
-    }
+  // Redirect to dashboard if logged in and trying to access login/signup
+  if (user && (path.startsWith("/login") || path.startsWith("/signup"))) {
+    // We'll let the layout handle the specific role redirect
+    return NextResponse.redirect(new URL("/admin/overview", request.url)) // Default fallback
   }
 
   return supabaseResponse

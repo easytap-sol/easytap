@@ -6,50 +6,80 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
-  /* Bind the font variable from layout.tsx */
-  --font-sans: var(--font-satoshi);
-  
+
+  /* Bind the font variable from layout.tsx exactly for Tailwind v4 */
+  --font-sans: var(--font-satoshi), "Satoshi", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand Palette */
   --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  
+
+  /* Semantic Colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+
   --radius-xl: 1rem;
 }
 
 :root {
   /* Clean, High Contrast Backgrounds */
-  --background: #F1F5F9; /* Slate-100: Better contrast than pure white for dashboards */
-  --foreground: #0F172A; /* Slate-900: Sharp text */
-  
-  /* BRAND: Deep Trust Blue */
-  --primary: #165FAC; 
+  --background: #F8FAFC;
+  /* Slate-50: Fresh dashboard background */
+  --foreground: #020617;
+  /* Slate-950: Sharp text */
+
+  /* BRAND: Mint Teal & Deep Forest */
+  --primary: #00BF9A;
+  --primary-deep: #006C5B;
   --primary-foreground: #ffffff;
-  
-  /* BRAND: Money/Growth Green */
-  --secondary: #7CCE76; 
-  --secondary-foreground: #022c22; /* Dark green text for readability on green bg */
-  
+
+  /* BRAND: Lime Accent */
+  --secondary: #ECFD46;
+  --secondary-foreground: #006C5B;
+
   /* UI Elements */
-  --muted: #E2E8F0;
+  --muted: #F1F5F9;
   --muted-foreground: #64748B;
-  
-  --border: #CBD5E1; /* High contrast borders */
-  --ring: #165FAC;   /* Focus ring matches primary */
-  --radius: 0.5rem;  /* Slightly sharper corners for "Financial" feel */
+
+  /* Status Colors */
+  --success: #00BF9A;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  --border: #E2E8F0;
+  --ring: #00BF9A;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-satoshi), "Satoshi", ui-sans-serif, system-ui, sans-serif !important;
+  }
 }
 
 @layer utilities {
-  /* refined glow for the new blue */
-  .bg-glow-blue {
-    background: radial-gradient(circle, rgba(22, 95, 172, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+
+  /* brand glow */
+  .bg-glow-brand {
+    background: radial-gradient(circle, rgba(0, 191, 154, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
   }
-  
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -58,6 +88,14 @@
 
 /* PWA / Print Styles */
 @media print {
-  .sidebar, .mobile-menu-btn { display: none !important; }
-  .main-content { margin-left: 0 !important; width: 100% !important; }
+
+  .sidebar,
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
 }

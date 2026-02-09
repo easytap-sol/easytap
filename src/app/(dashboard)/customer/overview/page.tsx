@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
-import { 
-  CreditCard, Calendar, ArrowUpRight, Clock, CheckCircle, 
+import {
+  CreditCard, Calendar, ArrowUpRight, Clock, CheckCircle,
   AlertCircle, DollarSign, TrendingUp, PieChart, Users,
   Wallet, Zap, History, ChevronRight, MoreHorizontal,
   Eye, FileText, TrendingDown, Repeat, BadgePercent
@@ -33,7 +33,7 @@ export default async function CustomerOverviewPage() {
     .order("created_at", { ascending: false });
 
   const safeLoans = loans || [];
-  
+
   // Categorize loans
   const activeLoans = safeLoans.filter((l: any) => l.status === 'active');
   const pendingLoans = safeLoans.filter((l: any) => l.status === 'pending');
@@ -58,29 +58,29 @@ export default async function CustomerOverviewPage() {
   // Calculate credit health score based on loan history
   const calculateCreditHealth = () => {
     if (safeLoans.length === 0) return { score: 0, level: 'No data' };
-    
+
     let score = 500; // Base score
-    
+
     // Positive factors
     if (paidLoans.length > 0) score += 200;
     if (totalRepaid > totalBorrowed * 0.8) score += 100;
     if (overdueLoans.length === 0) score += 100;
     if (activeLoans.length === 0 && paidLoans.length > 0) score += 100;
-    
+
     // Negative factors
     if (overdueLoans.length > 0) score -= 150;
     if (rejectedLoans.length > 0) score -= 50;
     if (activeLoans.length > 2) score -= 50; // Too many active loans
-    
+
     // Cap score between 0-1000
     score = Math.max(0, Math.min(1000, score));
-    
+
     // Determine level
     let level = 'Poor';
     if (score >= 700) level = 'Excellent';
     else if (score >= 500) level = 'Good';
     else if (score >= 300) level = 'Fair';
-    
+
     return { score, level };
   };
 
@@ -95,7 +95,7 @@ export default async function CustomerOverviewPage() {
   // Calculate next payment date with null checks
   let nextPaymentDate = null;
   let nextPaymentAmount = 0;
-  
+
   if (activeLoans.length > 0) {
     const upcomingLoans = activeLoans
       .filter(l => l.due_date)
@@ -104,7 +104,7 @@ export default async function CustomerOverviewPage() {
         const dateB = new Date(b.due_date!);
         return dateA.getTime() - dateB.getTime();
       });
-    
+
     if (upcomingLoans.length > 0 && upcomingLoans[0].due_date) {
       nextPaymentDate = new Date(upcomingLoans[0].due_date);
       nextPaymentAmount = upcomingLoans[0].balance_due || 0;
@@ -135,7 +135,7 @@ export default async function CustomerOverviewPage() {
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -165,19 +165,19 @@ export default async function CustomerOverviewPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <Wallet className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Key Metrics Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        
+
         {/* Card 1: Current Balance */}
         <div className="group relative rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
               <DollarSign className="h-5 w-5" />
             </div>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Balance</span>
@@ -194,8 +194,8 @@ export default async function CustomerOverviewPage() {
           <div className="flex items-center justify-between mb-4">
             <div className={cn(
               "flex h-10 w-10 items-center justify-center rounded-full",
-              nextPaymentDate && nextPaymentDate < now 
-                ? "bg-red-50 text-red-600" 
+              nextPaymentDate && nextPaymentDate < now
+                ? "bg-red-50 text-red-600"
                 : "bg-emerald-50 text-emerald-600"
             )}>
               <Calendar className="h-5 w-5" />
@@ -239,9 +239,9 @@ export default async function CustomerOverviewPage() {
             <span className="text-xs text-slate-400 mb-1 font-medium">Paid</span>
           </div>
           <div className="mt-3 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
-            <div 
-              className="h-full rounded-full bg-gradient-to-r from-violet-500 to-violet-600 transition-all duration-1000" 
-              style={{ width: `${repaymentRate}%` }} 
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-violet-500 to-violet-600 transition-all duration-1000"
+              style={{ width: `${repaymentRate}%` }}
             />
           </div>
         </div>
@@ -259,7 +259,7 @@ export default async function CustomerOverviewPage() {
               View Pending <ArrowUpRight className="h-3 w-3" />
             </Link>
           ) : (
-            <Link href="/customer/apply" className="text-sm font-bold text-slate-900 hover:text-blue-600 flex items-center gap-1">
+            <Link href="/customer/apply" className="text-sm font-bold text-slate-900 hover:text-primary flex items-center gap-1">
               Apply Now <ArrowUpRight className="h-3 w-3" />
             </Link>
           )}
@@ -281,18 +281,18 @@ export default async function CustomerOverviewPage() {
               {activeLoans.length} active
             </span>
           </div>
-          <Link href="/customer/loans" className="text-xs font-bold text-blue-600 hover:underline">
+          <Link href="/customer/loans" className="text-xs font-bold text-primary hover:underline">
             View All Loans
           </Link>
         </div>
-        
+
         <div className="p-4">
           {activeLoans.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {activeLoans.map((loan: any) => {
                 const loanProgress = loan.total_payable ? Math.round(((loan.amount_paid || 0) / loan.total_payable) * 100) : 0;
                 const isOverdue = loan.due_date && new Date(loan.due_date) < now && (loan.balance_due || 0) > 0;
-                
+
                 return (
                   <div key={loan.id} className="group rounded-[2rem] border border-slate-100 p-6 hover:shadow-lg transition-all duration-300">
                     <div className="flex items-center justify-between mb-4">
@@ -316,7 +316,7 @@ export default async function CustomerOverviewPage() {
                           <span className="font-bold text-slate-900">{loanProgress}%</span>
                         </div>
                         <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
-                          <div 
+                          <div
                             className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 transition-all duration-1000"
                             style={{ width: `${loanProgress}%` }}
                           />
@@ -340,7 +340,7 @@ export default async function CustomerOverviewPage() {
                       </div>
 
                       <div className="pt-4 border-t border-slate-100">
-                        <Link 
+                        <Link
                           href={`/customer/loans/${loan.id}`}
                           className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors"
                         >
@@ -362,9 +362,9 @@ export default async function CustomerOverviewPage() {
               <p className="text-slate-500 mb-6 max-w-sm">
                 You don't have any active loans at the moment.
               </p>
-              <Link 
+              <Link
                 href="/customer/apply"
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all"
+                className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary-deep shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
               >
                 Apply for a Loan
               </Link>
@@ -375,7 +375,7 @@ export default async function CustomerOverviewPage() {
 
       {/* 4. Split Section: Recent Activity & Credit Health */}
       <div className="grid gap-8 lg:grid-cols-3">
-        
+
         {/* LEFT: Recent Transactions (2 cols wide) */}
         <div className="lg:col-span-2 rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
           <div className="flex items-center justify-between border-b border-slate-100 px-8 py-6">
@@ -385,15 +385,15 @@ export default async function CustomerOverviewPage() {
               </div>
               <h3 className="font-bold text-slate-900">Recent Activity</h3>
             </div>
-            <Link href="/customer/transactions" className="text-xs font-bold text-blue-600 hover:underline">
+            <Link href="/customer/transactions" className="text-xs font-bold text-primary hover:underline">
               View All
             </Link>
           </div>
-          
+
           <div className="p-4">
             {/* Combine repayments from all loans */}
             {(() => {
-              const allRepayments = safeLoans.flatMap((loan: any) => 
+              const allRepayments = safeLoans.flatMap((loan: any) =>
                 (loan.repayments || []).map((rep: any) => ({ ...rep, loan_ref: loan.loan_ref }))
               ).sort((a, b) => {
                 const dateA = a.payment_date || a.created_at;
@@ -401,7 +401,7 @@ export default async function CustomerOverviewPage() {
                 if (!dateA || !dateB) return 0;
                 return new Date(dateB).getTime() - new Date(dateA).getTime();
               })
-              .slice(0, 6);
+                .slice(0, 6);
 
               return allRepayments.length > 0 ? (
                 <div className="space-y-2">
@@ -445,7 +445,7 @@ export default async function CustomerOverviewPage() {
               <h3 className="font-bold text-white">Credit Health</h3>
             </div>
           </div>
-          
+
           <div className="p-6 space-y-6">
             {/* Credit Score (calculated, not from database) */}
             <div className="text-center">
@@ -457,7 +457,7 @@ export default async function CustomerOverviewPage() {
                 </p>
               </div>
               <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
-                <div 
+                <div
                   className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400"
                   style={{ width: `${(creditHealth.score / 1000) * 100}%` }}
                 />
@@ -496,7 +496,7 @@ export default async function CustomerOverviewPage() {
 
             {/* Quick Actions */}
             <div className="pt-4 border-t border-white/10">
-              <Link 
+              <Link
                 href="/customer/loans"
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 text-sm font-bold text-white hover:bg-white/20 transition-colors"
               >
@@ -523,16 +523,16 @@ export default async function CustomerOverviewPage() {
             </span>
           </div>
         </div>
-        
+
         <div className="p-4">
           <div className="grid grid-cols-4 gap-4 text-center">
             <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-100">
               <p className="text-2xl font-bold text-emerald-700">{activeLoans.length}</p>
               <p className="text-xs font-bold text-emerald-600 uppercase tracking-wider mt-1">Active</p>
             </div>
-            <div className="p-6 rounded-2xl bg-blue-50 border border-blue-100">
-              <p className="text-2xl font-bold text-blue-700">{paidLoans.length}</p>
-              <p className="text-xs font-bold text-blue-600 uppercase tracking-wider mt-1">Paid</p>
+            <div className="p-6 rounded-2xl bg-primary/10 border border-primary/20">
+              <p className="text-2xl font-bold text-primary-deep">{paidLoans.length}</p>
+              <p className="text-xs font-bold text-primary uppercase tracking-wider mt-1">Paid</p>
             </div>
             <div className="p-6 rounded-2xl bg-amber-50 border border-amber-100">
               <p className="text-2xl font-bold text-amber-700">{pendingLoans.length}</p>

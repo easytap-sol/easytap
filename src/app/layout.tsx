@@ -65,13 +65,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${satoshi.variable} scroll-smooth`}>
+    <html lang="en" className={`${satoshi.variable} ${satoshi.className} scroll-smooth`}>
       <head>
         {/* Static PWA Assets remain in /public */}
         <link rel="apple-touch-icon" href="/icon.png" />
       </head>
-      <body 
-        className="font-sans antialiased bg-background text-foreground" 
+      <body
+        className={`${satoshi.className} antialiased bg-background text-foreground`}
         suppressHydrationWarning={true}
       >
         {/* 

@@ -60,13 +60,13 @@ export function DashboardHeader({ userEmail, role, companyName }: { userEmail: s
         <input
           type="text"
           placeholder="Search loans, users, or transactions..."
-          className="w-full h-10 rounded-full bg-slate-50 border-none pl-10 pr-4 text-sm focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-slate-400 text-slate-700"
+          className="w-full h-10 rounded-full bg-slate-50 border-none pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400 text-slate-700"
         />
       </div>
 
       <div className="flex items-center gap-3 sm:gap-6 ml-auto">
         {/* Notifications */}
-        <button className="relative p-2 text-slate-400 hover:text-blue-600 transition-colors">
+        <button className="relative p-2 text-slate-400 hover:text-primary transition-colors">
           <Bell className="h-5 w-5" />
           <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
         </button>
@@ -80,7 +80,7 @@ export function DashboardHeader({ userEmail, role, companyName }: { userEmail: s
             className="flex items-center gap-3 group"
           >
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-bold text-slate-700 leading-none group-hover:text-blue-700 transition-colors">
+              <p className="text-sm font-bold text-slate-700 leading-none group-hover:text-primary transition-colors">
                 {userEmail.split('@')[0]}
               </p>
               <p className="text-[10px] text-slate-400 font-medium capitalize mt-1">
@@ -141,12 +141,12 @@ export function DashboardHeader({ userEmail, role, companyName }: { userEmail: s
         <div className="lg:hidden fixed inset-0 z-[60]">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300"
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsMobileNavOpen(false)}
           />
 
           {/* Drawer */}
-          <div className="absolute inset-y-0 left-0 w-full max-w-[280px] bg-white shadow-2xl animate-in slide-in-from-left duration-500 ease-out h-full overflow-hidden">
+          <div className="fixed inset-y-0 left-0 w-full max-w-[280px] bg-white shadow-2xl animate-in slide-in-from-left duration-500 ease-out h-[100dvh] overflow-hidden">
             <Sidebar
               role={role}
               companyName={companyName}

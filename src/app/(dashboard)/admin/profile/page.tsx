@@ -37,7 +37,7 @@ export default async function AdminProfilePage() {
 
   return (
     <div className="space-y-8">
-      
+
       {/* 1. Header Hero Card */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-slate-900 to-slate-800 p-8 md:p-12 text-white shadow-2xl shadow-slate-900/10">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -65,28 +65,28 @@ export default async function AdminProfilePage() {
             </div>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <User className="absolute -right-10 -bottom-10 h-64 w-64 text-white/5 rotate-12" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       {/* 2. Main Content Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
-        
+
         {/* LEFT COLUMN: Profile Card & Quick Stats */}
         <div className="lg:col-span-1 space-y-6">
-          
+
           {/* Profile Card */}
           <div className="relative rounded-[2.5rem] border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-8 shadow-sm overflow-hidden">
             {/* Gradient Background */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-blue-600/10 to-indigo-600/10" />
-            
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-primary/10 to-primary-deep/10" />
+
             <div className="relative z-10 flex flex-col items-center text-center">
               {/* Avatar */}
               <div className="mb-4">
                 <div className="relative">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 p-1">
+                  <div className="w-32 h-32 rounded-full bg-primary p-1">
                     <div className="w-full h-full rounded-full bg-white flex items-center justify-center text-4xl font-bold text-slate-900">
                       {profile.first_name?.[0]}{profile.last_name?.[0]}
                     </div>
@@ -117,7 +117,7 @@ export default async function AdminProfilePage() {
                     <p className="font-bold text-slate-900 truncate">{profile.email}</p>
                   </div>
                 </div>
-                
+
                 {profile.mobile_number && (
                   <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50">
                     <Phone className="h-5 w-5 text-slate-400" />
@@ -172,18 +172,18 @@ export default async function AdminProfilePage() {
 
         {/* RIGHT COLUMN: Settings & Details */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* Account Settings */}
           <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
             <div className="border-b border-slate-100 px-8 py-6">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Settings className="h-4 w-4" />
                 </div>
                 <h3 className="font-bold text-slate-900">Account Settings</h3>
               </div>
             </div>
-            
+
             <div className="p-8 space-y-6">
               {/* Personal Information */}
               <div className="space-y-4">
@@ -252,7 +252,7 @@ export default async function AdminProfilePage() {
 
           {/* Security & Preferences */}
           <div className="grid md:grid-cols-2 gap-6">
-            
+
             {/* Security Settings */}
             <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
               <div className="border-b border-slate-100 px-6 py-5">
@@ -263,7 +263,7 @@ export default async function AdminProfilePage() {
                   <h3 className="font-bold text-slate-900">Security</h3>
                 </div>
               </div>
-              
+
               <div className="p-6 space-y-4">
                 <div className="group p-4 rounded-2xl border border-slate-100 hover:border-red-200 hover:bg-red-50/30 transition-all cursor-pointer">
                   <div className="flex items-center justify-between">
@@ -277,13 +277,13 @@ export default async function AdminProfilePage() {
                   </div>
                 </div>
 
-                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer">
+                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-bold text-slate-900">Two-Factor Authentication</p>
                       <p className="text-sm text-slate-500">Add an extra layer of security</p>
                     </div>
-                    <button className="text-sm font-bold text-blue-600 hover:text-blue-700 px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors">
+                    <button className="text-sm font-bold text-primary hover:text-primary-deep px-4 py-2 rounded-xl hover:bg-primary/10 transition-colors">
                       Enable
                     </button>
                   </div>
@@ -309,15 +309,15 @@ export default async function AdminProfilePage() {
             <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
               <div className="border-b border-slate-100 px-6 py-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Database className="h-4 w-4" />
                   </div>
                   <h3 className="font-bold text-slate-900">Business</h3>
                 </div>
               </div>
-              
+
               <div className="p-6 space-y-4">
-                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:bg-indigo-50/30 transition-all cursor-pointer">
+                <div className="group p-4 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-bold text-slate-900">Company Settings</p>
@@ -325,9 +325,9 @@ export default async function AdminProfilePage() {
                         {businessConfig?.company_name || 'EasyTap'}
                       </p>
                     </div>
-                    <Link 
-                      href="/admin/settings" 
-                      className="text-sm font-bold text-indigo-600 hover:text-indigo-700 px-4 py-2 rounded-xl hover:bg-indigo-50 transition-colors"
+                    <Link
+                      href="/admin/settings"
+                      className="text-sm font-bold text-primary hover:text-primary-deep px-4 py-2 rounded-xl hover:bg-primary/10 transition-colors"
                     >
                       Configure
                     </Link>
@@ -353,7 +353,7 @@ export default async function AdminProfilePage() {
                       <p className="text-sm text-slate-500">Sign out from all devices</p>
                     </div>
                     <form action="/auth/signout" method="post">
-                      <button 
+                      <button
                         type="submit"
                         className="text-sm font-bold text-slate-600 hover:text-slate-700 px-4 py-2 rounded-xl hover:bg-slate-50 transition-colors flex items-center gap-2"
                       >

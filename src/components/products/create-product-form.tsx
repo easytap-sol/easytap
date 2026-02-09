@@ -16,7 +16,7 @@ export function CreateProductForm() {
         method: "POST",
         body: formData,
       });
-      
+
       if (response.ok) {
         // Refresh the page data
         router.refresh();
@@ -43,26 +43,26 @@ export function CreateProductForm() {
     <div className="rounded-[2.5rem] border border-slate-100 bg-white shadow-sm overflow-hidden">
       <div className="border-b border-slate-100 px-8 py-6">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
             <Plus className="h-4 w-4" />
           </div>
           <h3 className="font-bold text-slate-900">New Product</h3>
         </div>
       </div>
-      
+
       <div className="p-8">
-        <form 
+        <form
           action={handleSubmit}
           className="space-y-6"
         >
           <div>
             <label className="text-sm font-bold text-slate-700 mb-2 block">Product Name *</label>
-            <input 
-              name="name" 
-              type="text" 
-              placeholder="e.g. Business Booster" 
+            <input
+              name="name"
+              type="text"
+              placeholder="e.g. Business Booster"
               required
-              className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all"
+              className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
             />
           </div>
 
@@ -71,13 +71,13 @@ export function CreateProductForm() {
               <label className="text-sm font-bold text-slate-700 mb-2 block">Duration (Days) *</label>
               <div className="relative">
                 <Calendar className="w-4 h-4 absolute left-4 top-3.5 text-slate-400" />
-                <input 
-                  name="durationDays" 
-                  type="number" 
-                  placeholder="30" 
-                  required 
+                <input
+                  name="durationDays"
+                  type="number"
+                  placeholder="30"
+                  required
                   min="1"
-                  className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all"
+                  className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
                 />
               </div>
             </div>
@@ -85,13 +85,13 @@ export function CreateProductForm() {
               <label className="text-sm font-bold text-slate-700 mb-2 block">Interest Rate (%) *</label>
               <div className="relative">
                 <Percent className="w-4 h-4 absolute left-4 top-3.5 text-slate-400" />
-                <input 
-                  name="interestRate" 
-                  type="number" 
-                  placeholder="10" 
-                  required 
+                <input
+                  name="interestRate"
+                  type="number"
+                  placeholder="10"
+                  required
                   step="0.1"
-                  className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all"
+                  className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
                 />
               </div>
             </div>
@@ -100,49 +100,49 @@ export function CreateProductForm() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-bold text-slate-700 mb-2 block">Processing Fee</label>
-              <input 
-                name="processingFee" 
-                type="number" 
-                placeholder="0" 
-                min="0" 
+              <input
+                name="processingFee"
+                type="number"
+                placeholder="0"
+                min="0"
                 step="0.01"
                 defaultValue="0"
-                className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all"
+                className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
               />
             </div>
             <div>
               <label className="text-sm font-bold text-slate-700 mb-2 block">Penalty Rate (%)</label>
-              <input 
-                name="penaltyRate" 
-                type="number" 
-                placeholder="0" 
-                min="0" 
+              <input
+                name="penaltyRate"
+                type="number"
+                placeholder="0"
+                min="0"
                 step="0.1"
                 defaultValue="0"
-                className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all"
+                className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
               />
             </div>
           </div>
 
           <div>
             <label className="text-sm font-bold text-slate-700 mb-2 block">Description</label>
-            <textarea 
-              name="description" 
-              placeholder="Short description of this loan product..." 
+            <textarea
+              name="description"
+              placeholder="Short description of this loan product..."
               rows={3}
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none resize-none transition-all"
+              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none resize-none transition-all"
             />
           </div>
 
           <div className="flex gap-3">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={isSubmitting}
-              className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+              className="flex-1 h-12 bg-primary text-white font-bold rounded-2xl hover:bg-primary-deep shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
             >
               {isSubmitting ? "Creating..." : "Create Product"}
             </button>
-            <button 
+            <button
               type="button"
               onClick={handleRefresh}
               disabled={isRefreshing}

@@ -145,7 +145,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
     switch (status) {
       case 'pending': return { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' };
       case 'active': return { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' };
-      case 'paid': return { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' };
+      case 'paid': return { bg: 'bg-primary/10', text: 'text-primary-deep', border: 'border-primary/20' };
       case 'rejected': return { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' };
       default: return { bg: 'bg-slate-50', text: 'text-slate-700', border: 'border-slate-200' };
     }
@@ -260,7 +260,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
               {/* Customer Profile Card */}
               <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <User className="h-4 w-4" />
                   </div>
                   <h4 className="font-bold text-slate-900">Customer Profile</h4>
@@ -299,7 +299,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
               {/* Loan Terms Card */}
               <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-50 text-violet-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <FileText className="h-4 w-4" />
                   </div>
                   <h4 className="font-bold text-slate-900">Loan Terms</h4>
@@ -332,18 +332,18 @@ export function AdminLoanCard({ loan }: { loan: any }) {
               <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <TrendingUp className="h-4 w-4" />
                     </div>
                     <h4 className="font-bold text-slate-900">Repayment Progress</h4>
                   </div>
-                  <span className="text-lg font-bold text-emerald-600">{progressPercentage}%</span>
+                  <span className="text-lg font-bold text-primary">{progressPercentage}%</span>
                 </div>
 
                 <div className="space-y-4">
                   <div className="h-3 w-full rounded-full bg-slate-100 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 transition-all duration-1000"
+                      className="h-full rounded-full bg-gradient-to-r from-primary to-primary-deep transition-all duration-1000"
                       style={{ width: `${progressPercentage}%` }}
                     />
                   </div>
@@ -368,7 +368,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
               {/* Action Card */}
               <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Zap className="h-4 w-4" />
                   </div>
                   <h4 className="font-bold text-slate-900">Quick Actions</h4>
@@ -398,7 +398,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                               setApproveError(null);
                               setRejectError(null);
                             }}
-                            className="flex-1 h-12 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all"
+                            className="flex-1 h-12 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-deep transition-all"
                           >
                             Approve
                           </button>
@@ -423,7 +423,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                               placeholder="e.g. RJH82D9K3L"
                               value={disbursementRef}
                               onChange={(e) => setDisbursementRef(e.target.value.toUpperCase())}
-                              className="w-full h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 outline-none"
+                              className="w-full h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                             />
                             <p className="text-xs text-slate-500">
                               Enter the M-Pesa transaction reference for disbursement
@@ -433,7 +433,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                             <button
                               onClick={handleApprove}
                               disabled={isApproving || !disbursementRef.trim()}
-                              className="flex-1 h-12 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                              className="flex-1 h-12 bg-primary text-white font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                               {isApproving ? (
                                 <>
@@ -519,7 +519,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                             setShowRepaymentForm(true);
                             setRepaymentError(null);
                           }}
-                          className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all"
+                          className="w-full h-12 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-deep transition-all"
                         >
                           Record Repayment
                         </button>
@@ -541,7 +541,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                               onChange={(e) => setRepaymentAmount(e.target.value)}
                               min="1"
                               step="0.01"
-                              className="w-full h-12 rounded-xl border border-blue-200 bg-white px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                              className="w-full h-12 rounded-xl border border-primary/20 bg-white px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                             />
                           </div>
                           <div className="space-y-2">
@@ -551,7 +551,7 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                               placeholder="M-Pesa transaction ID"
                               value={repaymentRef}
                               onChange={(e) => setRepaymentRef(e.target.value.toUpperCase())}
-                              className="w-full h-12 rounded-xl border border-blue-200 bg-white px-4 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none"
+                              className="w-full h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                             />
                           </div>
                           <div className="space-y-2">
@@ -561,14 +561,14 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                               value={repaymentNotes}
                               onChange={(e) => setRepaymentNotes(e.target.value)}
                               rows={2}
-                              className="w-full rounded-xl border border-blue-200 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none resize-none"
+                              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none"
                             />
                           </div>
                           <div className="flex gap-2">
                             <button
                               type="submit"
                               disabled={isRecordingRepayment || !repaymentAmount || !repaymentRef}
-                              className="flex-1 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                              className="flex-1 h-12 bg-primary text-white font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
                             >
                               {isRecordingRepayment ? (
                                 <>
@@ -600,9 +600,9 @@ export function AdminLoanCard({ loan }: { loan: any }) {
 
                   {/* Paid Loan Status */}
                   {loan.status === 'paid' && (
-                    <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100">
-                      <CheckCircle className="h-5 w-5 text-indigo-600" />
-                      <span className="font-bold text-indigo-700">Loan Fully Repaid & Closed</span>
+                    <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-primary/10 border border-primary/20">
+                      <CheckCircle className="h-5 w-5 text-primary" />
+                      <span className="font-bold text-primary-deep">Loan Fully Repaid & Closed</span>
                     </div>
                   )}
 
@@ -630,8 +630,8 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                 <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:bg-slate-200">
                   {/* Application Received */}
                   <div className="relative flex gap-4 items-start">
-                    <div className="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 border-4 border-white">
-                      <div className="h-2 w-2 rounded-full bg-blue-600" />
+                    <div className="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 border-4 border-white">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
                     </div>
                     <div className="flex-1">
                       <p className="font-bold text-slate-900 text-sm">Application Received</p>
@@ -691,11 +691,11 @@ export function AdminLoanCard({ loan }: { loan: any }) {
                   {/* Loan Closed */}
                   {loan.status === 'paid' && (
                     <div className="relative flex gap-4 items-start">
-                      <div className="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 border-4 border-white">
-                        <CheckCircle className="h-3 w-3 text-indigo-600" />
+                      <div className="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 border-4 border-white">
+                        <CheckCircle className="h-3 w-3 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-bold text-indigo-700 text-sm">Loan Fully Repaid</p>
+                        <p className="font-bold text-primary-deep text-sm">Loan Fully Repaid</p>
                         <p className="text-xs text-slate-500">All payments completed</p>
                       </div>
                     </div>

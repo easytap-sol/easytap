@@ -118,3 +118,39 @@ export async function resetUserPasswordAction(userId: string, newPassword: strin
         return { error: error.message || "Failed to reset password" };
     }
 }
+
+/**
+ * Update user status (approve/reject/deactivate)
+ */
+export async function updateUserStatusAction(userId: string, status: 'active' | 'inactive' | 'rejected') {
+    const supabase = await createClient();
+
+    // Authorization check
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { error: "Unauthorized" };
+
+    const { data: adminProfile } = await supabase.from('profiles').select('role').eq('id', user.id).single();
+    if (!['admin', 'super_admin'].includes(adminProfile?.role || '')) {
+        return { error: "Unauthorized. Admin access required." };
+    }
+
+    try {
+        const adminClient = createServiceClient(supabaseUrl, supabaseServiceKey);
+
+        const { error } = await adminClient
+            .from('profiles')
+            .update({ status })
+            .eq('id', userId);
+
+        if (error) {
+            console.error("Status update error:", error);
+            return { error: error.message };
+        }
+
+        revalidatePath('/admin/users');
+        return { success: `User status updated to ${status}` };
+    } catch (error: any) {
+        console.error("Update status error:", error);
+        return { error: error.message || "Failed to update user status" };
+    }
+}

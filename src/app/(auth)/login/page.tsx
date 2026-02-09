@@ -2,9 +2,9 @@
 
 import { useState, useActionState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  Loader2, 
+import {
+  ArrowRight,
+  Loader2,
   AlertCircle,
   Smartphone,
   Mail
@@ -13,7 +13,7 @@ import { loginAction } from "@/actions/auth-actions";
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(loginAction, null);
-  
+
   // Logic state
   const [inputValue, setInputValue] = useState("");
   const [loginMethod, setLoginMethod] = useState<"phone" | "email">("email");
@@ -27,7 +27,7 @@ export default function LoginPage() {
 
   return (
     <div className="bg-white">
-      
+
       {/* Clean Header */}
       <div className="mb-10">
         <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 mb-2">
@@ -55,10 +55,10 @@ export default function LoginPage() {
           <label className="text-sm font-semibold text-slate-700 ml-1">
             Email or Phone Number
           </label>
-          
+
           <div className="relative group">
             {/* Icon (Left) */}
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">
               {loginMethod === "phone" ? <Smartphone className="w-5 h-5" /> : <Mail className="w-5 h-5" />}
             </div>
 
@@ -68,19 +68,18 @@ export default function LoginPage() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="e.g. 0712 345 678 or admin@easytap.com"
-              className="w-full h-14 rounded-2xl bg-slate-50 border-0 pl-12 pr-4 text-slate-900 font-medium placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-600 transition-all shadow-sm ring-1 ring-slate-100"
+              className="w-full h-14 rounded-2xl bg-slate-50 border-0 pl-12 pr-4 text-slate-900 font-medium placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-primary transition-all shadow-sm ring-1 ring-slate-100"
               required
               autoComplete="username"
             />
-            
+
             {/* Badge (Right) - Shows user what mode they are in */}
             {inputValue.length > 0 && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${
-                  loginMethod === 'phone' 
-                    ? 'bg-emerald-50 text-emerald-600 border-emerald-100' 
-                    : 'bg-blue-50 text-blue-600 border-blue-100'
-                } transition-all duration-300`}>
+                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${loginMethod === 'phone'
+                    ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
+                    : 'bg-primary/10 text-primary border-primary/20'
+                  } transition-all duration-300`}>
                   {loginMethod === "phone" ? "CUSTOMER" : "ADMIN"}
                 </span>
               </div>
@@ -94,7 +93,7 @@ export default function LoginPage() {
             <label className="text-sm font-semibold text-slate-700">Password</label>
             <Link
               href="/forgot-password"
-              className="text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline"
+              className="text-sm font-medium text-primary hover:text-primary-deep hover:underline"
             >
               Forgot Password?
             </Link>
@@ -103,7 +102,7 @@ export default function LoginPage() {
             name="password"
             type="password"
             placeholder="••••••••••••"
-            className="w-full h-14 rounded-2xl bg-slate-50 border-0 px-4 text-slate-900 font-medium placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-600 transition-all shadow-sm ring-1 ring-slate-100"
+            className="w-full h-14 rounded-2xl bg-slate-50 border-0 px-4 text-slate-900 font-medium placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-primary transition-all shadow-sm ring-1 ring-slate-100"
             required
             autoComplete="current-password"
           />
@@ -113,7 +112,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full h-14 bg-blue-600 text-white text-base font-bold rounded-2xl hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+          className="w-full h-14 bg-primary text-white text-base font-bold rounded-2xl hover:bg-primary-deep hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
         >
           {isPending ? (
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -127,7 +126,7 @@ export default function LoginPage() {
         {/* SIGN UP LINK */}
         <p className="text-center text-slate-500 text-sm pt-2">
           Don't have an account?{' '}
-          <Link href="/signup" className="font-bold text-blue-600 hover:text-blue-700 hover:underline">
+          <Link href="/signup" className="font-bold text-primary hover:text-primary-deep hover:underline">
             Register Now
           </Link>
         </p>
